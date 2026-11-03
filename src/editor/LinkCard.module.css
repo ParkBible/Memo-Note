@@ -1,0 +1,115 @@
+.card {
+  position: relative;
+  max-width: 560px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.card:hover {
+  border-color: var(--color-border-strong);
+}
+
+.selected {
+  border-color: var(--color-focus-ring);
+}
+
+.link {
+  display: flex;
+  min-height: 96px;
+  /* 에디터 본문의 링크 색·밑줄 규칙이 카드 전체에 먹지 않게 */
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  padding: var(--space-3) var(--space-10) var(--space-3) var(--space-4);
+}
+
+.title {
+  display: -webkit-box;
+  overflow: hidden;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.description {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.host {
+  margin-top: auto;
+  overflow: hidden;
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.image {
+  flex: none;
+  width: 140px;
+  object-fit: cover;
+  background: var(--color-surface-muted);
+}
+
+.actions {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  display: flex;
+  opacity: 0;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.card:hover .actions,
+.card:focus-within .actions,
+.selected .actions {
+  opacity: 1;
+}
+
+/* 이미지 위에 겹치므로 버튼 바탕을 깐다 */
+.actions button {
+  background: var(--color-surface);
+}
+
+.skeleton {
+  display: block;
+  width: 80%;
+  height: 0.9em;
+  border-radius: 4px;
+  background: var(--color-skeleton);
+}
+
+.skeletonTitle {
+  width: 55%;
+  height: 1.1em;
+}
+
+@media (hover: none) {
+  .actions {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 479px) {
+  .image {
+    width: 96px;
+  }
+}

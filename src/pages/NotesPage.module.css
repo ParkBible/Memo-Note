@@ -1,0 +1,148 @@
+.page {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  height: 100%;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid var(--color-border);
+}
+
+.toolbar {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--layout-gutter) var(--space-3);
+}
+
+.search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  height: 40px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-subtle);
+}
+
+.search:focus-within {
+  border-color: var(--color-focus-ring);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--font-size-sm);
+}
+
+.empty {
+  padding: var(--space-6) var(--layout-gutter);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--space-2) var(--space-6);
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  transition: background-color var(--duration-fast) ease;
+}
+
+.item:hover {
+  background: var(--color-surface-muted);
+}
+
+.item.active {
+  background: var(--color-primary-soft);
+}
+
+.itemTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  overflow: hidden;
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pinMark {
+  flex: none;
+  color: var(--color-primary);
+}
+
+.itemMeta {
+  display: flex;
+  gap: var(--space-2);
+  overflow: hidden;
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.itemMeta time {
+  flex: none;
+}
+
+.itemPreview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pane {
+  min-width: 0;
+  min-height: 0;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  height: 100%;
+  color: var(--color-text-subtle);
+}
+
+/* 좁은 화면: 목록과 에디터 중 하나만 */
+@media (max-width: 767px) {
+  .page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    border-right: 0;
+  }
+
+  .pane {
+    display: none;
+  }
+
+  .hasOpen .sidebar {
+    display: none;
+  }
+
+  .hasOpen .pane {
+    display: block;
+  }
+}

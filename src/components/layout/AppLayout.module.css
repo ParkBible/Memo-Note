@@ -1,0 +1,66 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.header {
+  flex: none;
+  height: var(--header-height);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: var(--layout-max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding-inline: var(--layout-gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.brandMark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.sync {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.syncNotice {
+  color: var(--color-danger);
+  font-size: var(--font-size-xs);
+}
+
+/* 목록·에디터가 각자 스크롤하도록 남은 높이를 꽉 채운다 */
+.main {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+}

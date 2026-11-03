@@ -1,0 +1,195 @@
+.note {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--layout-gutter);
+}
+
+.back {
+  display: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+}
+
+.edited {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.missing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--layout-gutter);
+  color: var(--color-text-muted);
+}
+
+.missing a {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.editor {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--layout-gutter) var(--space-16);
+}
+
+/* 에디터 본문. TipTap 이 만드는 요소라 전역 선택자로 꾸민다 */
+.editor :global(.tiptap) {
+  max-width: 760px;
+  min-height: 100%;
+  margin: 0 auto;
+  outline: none;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  overflow-wrap: anywhere;
+}
+
+.editor :global(.tiptap > * + *) {
+  margin-top: 0.6em;
+}
+
+.editor :global(.tiptap h1),
+.editor :global(.tiptap h2),
+.editor :global(.tiptap h3) {
+  margin-top: 1.2em;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+.editor :global(.tiptap > h1:first-child),
+.editor :global(.tiptap > h2:first-child),
+.editor :global(.tiptap > h3:first-child) {
+  margin-top: 0;
+}
+
+.editor :global(.tiptap h1) {
+  font-size: var(--font-size-2xl);
+}
+
+.editor :global(.tiptap h2) {
+  font-size: var(--font-size-xl);
+}
+
+.editor :global(.tiptap h3) {
+  font-size: var(--font-size-lg);
+}
+
+.editor :global(.tiptap ul),
+.editor :global(.tiptap ol) {
+  padding-left: 1.4em;
+}
+
+.editor :global(.tiptap ul) {
+  list-style: disc;
+}
+
+.editor :global(.tiptap ol) {
+  list-style: decimal;
+}
+
+.editor :global(.tiptap li > p) {
+  margin: 0;
+}
+
+.editor :global(.tiptap ul[data-type='taskList']) {
+  padding-left: 0.2em;
+  list-style: none;
+}
+
+.editor :global(.tiptap ul[data-type='taskList'] li) {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.editor :global(.tiptap ul[data-type='taskList'] li > label) {
+  flex: none;
+  padding-top: 0.2em;
+  user-select: none;
+}
+
+.editor :global(.tiptap ul[data-type='taskList'] input[type='checkbox']) {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.editor :global(.tiptap ul[data-type='taskList'] li > div) {
+  flex: 1;
+  min-width: 0;
+}
+
+.editor :global(.tiptap ul[data-type='taskList'] li[data-checked='true'] > div) {
+  color: var(--color-text-subtle);
+  text-decoration: line-through;
+}
+
+.editor :global(.tiptap blockquote) {
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+}
+
+.editor :global(.tiptap code) {
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  background: var(--color-surface-sunken);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.editor :global(.tiptap pre) {
+  overflow-x: auto;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-sunken);
+}
+
+.editor :global(.tiptap pre code) {
+  padding: 0;
+  background: none;
+}
+
+.editor :global(.tiptap a) {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.editor :global(.tiptap hr) {
+  margin: 1.2em 0;
+  border: 0;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.editor :global(.tiptap p.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: var(--color-text-subtle);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .back {
+    display: grid;
+  }
+}
