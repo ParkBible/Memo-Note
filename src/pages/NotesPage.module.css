@@ -74,6 +74,12 @@
 
 .item.active {
   background: var(--color-primary-soft);
+  box-shadow: inset 3px 0 0 var(--color-primary);
+}
+
+/* 선택 배경 위에선 subtle 색이 대비 4.5:1 에 못 미쳐 한 단계 진하게 */
+.item.active .itemMeta {
+  color: var(--color-text-muted);
 }
 
 .itemTitle {
@@ -102,6 +108,9 @@
 
 .itemMeta time {
   flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
 }
 
 .itemPreview {

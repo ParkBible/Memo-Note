@@ -8,7 +8,7 @@
   flex: none;
   height: var(--header-height);
   background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 3px double var(--color-border-strong);
 }
 
 .headerInner {
@@ -26,19 +26,23 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
 }
 
+/* 살짝 기운 인주 도장 */
 .brandMark {
   display: grid;
   place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-md);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+  color: var(--color-primary);
+  transform: rotate(-4deg);
 }
 
 .spacer {

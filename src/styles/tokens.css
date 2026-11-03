@@ -1,63 +1,52 @@
 /*
- * 디자인 토큰 (레시피 노트 디자인 시스템 v2 — "Fresh Neutral").
- * 컴포넌트는 색·간격·radius·그림자를 직접 쓰지 말고 이 변수만 참조한다.
+ * 디자인 토큰 — "Paper & Ink" (빈티지).
+ * 컴포넌트는 색·간격·radius 를 직접 쓰지 말고 이 변수만 참조한다.
  * 다크 모드: <html data-theme="dark"> 로 강제하거나, data-theme 이 없으면 OS 설정을 따른다.
  *
  * 팔레트 원칙
- * - 바탕은 초록 기운이 아주 살짝 도는 쿨 뉴트럴. 카드는 순백, 구분은 그림자보다 얇은 보더로.
- * - 강조색은 신선한 허브 그린 하나. 버튼·선택 상태·포커스·매칭률에만 쓴다.
- * - 성공(있는 재료)은 강조색과 같은 계열, 경고(부족·확인 필요)는 앰버, 위험(삭제·에러)은 레드.
+ * - 바탕은 바랜 종이(누런 크림), 면은 조금 밝은 종이, 구분은 그림자 대신 갈색 잉크 선.
+ * - 글자는 순흑 대신 세피아 잉크. 강조색은 녹슨 적갈색(옛 도장·인주) 하나만.
+ * - 다크는 밤에 보는 크라프트지: 어두운 갈색 바탕 + 상아색 글자 + 테라코타 강조.
+ * - 본문·강조 대비는 라이트·다크 모두 WCAG AA(4.5:1) 이상.
  */
 :root {
   color-scheme: light;
 
   /* ── Color: neutral ────────────────────── */
-  --color-bg: #f6f7f6;
-  --color-surface: #ffffff;
-  --color-surface-muted: #f0f2f1;
-  --color-surface-sunken: #e8ebe9;
-  --color-border: #e2e6e4;
-  --color-border-strong: #cdd3d0;
+  --color-bg: #efe6d2;
+  --color-surface: #f7f0e0;
+  --color-surface-muted: #e8dcc3;
+  --color-surface-sunken: #e2d4b7;
+  --color-border: #d6c6a5;
+  --color-border-strong: #b9a27a;
 
-  --color-text: #141816;
-  --color-text-muted: #59625e;
-  --color-text-subtle: #6b7470;
+  --color-text: #2a211b;
+  --color-text-muted: #5e5044;
+  --color-text-subtle: #6f604f;
 
   /* ── Color: accent ─────────────────────── */
-  --color-primary: #12804f;
-  --color-primary-hover: #0d6b41;
-  --color-primary-soft: #e4f4ec;
-  --color-primary-soft-text: #0d6640;
-  --color-on-primary: #ffffff;
+  --color-primary: #9a3b26;
+  --color-primary-hover: #7f2f1d;
+  --color-primary-soft: #e6d2b8;
+  --color-primary-soft-text: #7a2c1b;
+  --color-on-primary: #fbf5e9;
 
   /* ── Color: semantic ───────────────────── */
-  --color-success: #12804f;
-  --color-success-soft: #e4f4ec;
-  --color-success-soft-text: #0d6640;
-  --color-warning: #c27a0e;
-  --color-warning-soft: #fdf3e1;
-  --color-warning-soft-text: #8c5507;
-  --color-danger: #d4382c;
-  --color-danger-soft: #fdeceb;
-  --color-danger-soft-text: #a6271d;
+  --color-danger: #b3261e;
+  --color-danger-soft: #f0d9cc;
+  --color-danger-soft-text: #8f1f18;
 
-  --color-focus-ring: #12804f;
-  --color-overlay: rgba(14, 18, 16, 0.5);
-  --color-skeleton: #eaedeb;
-  --color-skeleton-shine: #f5f7f6;
+  --color-focus-ring: #9a3b26;
+  --color-overlay: rgba(42, 33, 27, 0.5);
+  --color-skeleton: #e3d6bb;
+  --color-skeleton-shine: #efe6d2;
 
-  /* ── Color: illustration ─────────────── */
-  /* 냉장고 일러스트(2D 폴리곤 음식) 전용. UI 요소에는 쓰지 않는다. 초록(color-primary) 블록 위에 올라간다 */
-  --color-illo-cream: #fff8ea;
-  --color-illo-red: #e0453a;
-  --color-illo-orange: #f08a24;
-  --color-illo-yellow: #f6c445;
-  --color-illo-leaf: #0a4f31;
+  /* 종이 질감 노이즈의 진하기. 바탕에만 깐다 */
+  --paper-grain-opacity: 0.07;
 
   /* ── Typography ────────────────────────── */
-  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
-    'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-body: 'Gowun Batang', 'Noto Serif KR', AppleMyungjo, 'Nanum Myeongjo', Batang, serif;
+  --font-mono: 'Courier Prime', 'Courier New', ui-monospace, monospace;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -68,13 +57,14 @@
   --font-size-3xl: 2.25rem;
 
   --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
+  --font-weight-medium: 400;
+  /* 고운바탕은 400·700 두 굵기뿐이라 semibold 를 700 으로 둔다 */
+  --font-weight-semibold: 700;
   --font-weight-bold: 700;
 
-  --line-height-tight: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.7;
+  --line-height-tight: 1.3;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.85;
 
   /* ── Spacing (4px scale) ───────────────── */
   --space-1: 0.25rem;
@@ -89,14 +79,13 @@
   --space-16: 4rem;
 
   /* ── Radius ────────────────────────────── */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  /* 종이·활판 느낌이라 거의 각지게 */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
   --radius-full: 999px;
 
-  /* ── Shadow ──────────────────────────── */
-  /* 플랫(단색) 스타일: 그림자를 쓰지 않는다. 면은 단색 + color-border 로만 나눈다 */
   --shadow-sm: none;
   --shadow-md: none;
   --shadow-lg: none;
@@ -110,8 +99,6 @@
   --layout-max-width: 1120px;
   --layout-gutter: var(--space-4);
   --header-height: 60px;
-  --tabbar-height: 64px;
-  /* 브레이크포인트: sm 640px / md 768px / lg 1024px — 미디어쿼리는 변수를 못 쓰므로 숫자를 직접 쓴다 */
 }
 
 @media (min-width: 768px) {
@@ -123,80 +110,54 @@
 /* 다크 토큰: 강제 다크 + OS 다크(사용자가 라이트를 강제하지 않은 경우) 두 곳에 같은 값을 둔다 */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --color-bg: #0e1110;
-  --color-surface: #161a18;
-  --color-surface-muted: #1d2220;
-  --color-surface-sunken: #121614;
-  --color-border: #262c29;
-  --color-border-strong: #363e3a;
-  --color-text: #ecf0ee;
-  --color-text-muted: #a2aca7;
-  --color-text-subtle: #7f8984;
-  --color-primary: #3ccb85;
-  --color-primary-hover: #5ad899;
-  --color-primary-soft: #132a1f;
-  --color-primary-soft-text: #7fe2b0;
-  --color-on-primary: #05140c;
-  --color-success: #3ccb85;
-  --color-success-soft: #132a1f;
-  --color-success-soft-text: #7fe2b0;
-  --color-warning: #e9a73e;
-  --color-warning-soft: #2e2312;
-  --color-warning-soft-text: #f2c47a;
-  --color-danger: #f26b60;
-  --color-danger-soft: #331a18;
-  --color-danger-soft-text: #f7a29b;
-  --color-focus-ring: #3ccb85;
+  --color-bg: #1c1814;
+  --color-surface: #24201a;
+  --color-surface-muted: #2c261f;
+  --color-surface-sunken: #181510;
+  --color-border: #3a3228;
+  --color-border-strong: #54493a;
+  --color-text: #ece2cf;
+  --color-text-muted: #bfb19b;
+  --color-text-subtle: #9c8e78;
+  --color-primary: #d98b5f;
+  --color-primary-hover: #e6a27b;
+  --color-primary-soft: #3a261b;
+  --color-primary-soft-text: #f0b892;
+  --color-on-primary: #1c1410;
+  --color-danger: #ef7a6c;
+  --color-danger-soft: #3a1e19;
+  --color-danger-soft-text: #f5ab9f;
+  --color-focus-ring: #d98b5f;
   --color-overlay: rgba(0, 0, 0, 0.65);
-  --color-skeleton: #1f2422;
-  --color-skeleton-shine: #2a302d;
-  --color-illo-cream: #f6efe0;
-  --color-illo-red: #e85a4f;
-  --color-illo-orange: #f29a3f;
-  --color-illo-yellow: #f4cc5c;
-  --color-illo-leaf: #12804f;
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
+  --color-skeleton: #2c261f;
+  --color-skeleton-shine: #362f26;
+  --paper-grain-opacity: 0.05;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --color-bg: #0e1110;
-    --color-surface: #161a18;
-    --color-surface-muted: #1d2220;
-    --color-surface-sunken: #121614;
-    --color-border: #262c29;
-    --color-border-strong: #363e3a;
-    --color-text: #ecf0ee;
-    --color-text-muted: #a2aca7;
-    --color-text-subtle: #7f8984;
-    --color-primary: #3ccb85;
-    --color-primary-hover: #5ad899;
-    --color-primary-soft: #132a1f;
-    --color-primary-soft-text: #7fe2b0;
-    --color-on-primary: #05140c;
-    --color-success: #3ccb85;
-    --color-success-soft: #132a1f;
-    --color-success-soft-text: #7fe2b0;
-    --color-warning: #e9a73e;
-    --color-warning-soft: #2e2312;
-    --color-warning-soft-text: #f2c47a;
-    --color-danger: #f26b60;
-    --color-danger-soft: #331a18;
-    --color-danger-soft-text: #f7a29b;
-    --color-focus-ring: #3ccb85;
+    --color-bg: #1c1814;
+    --color-surface: #24201a;
+    --color-surface-muted: #2c261f;
+    --color-surface-sunken: #181510;
+    --color-border: #3a3228;
+    --color-border-strong: #54493a;
+    --color-text: #ece2cf;
+    --color-text-muted: #bfb19b;
+    --color-text-subtle: #9c8e78;
+    --color-primary: #d98b5f;
+    --color-primary-hover: #e6a27b;
+    --color-primary-soft: #3a261b;
+    --color-primary-soft-text: #f0b892;
+    --color-on-primary: #1c1410;
+    --color-danger: #ef7a6c;
+    --color-danger-soft: #3a1e19;
+    --color-danger-soft-text: #f5ab9f;
+    --color-focus-ring: #d98b5f;
     --color-overlay: rgba(0, 0, 0, 0.65);
-    --color-skeleton: #1f2422;
-    --color-skeleton-shine: #2a302d;
-    --color-illo-cream: #f6efe0;
-    --color-illo-red: #e85a4f;
-    --color-illo-orange: #f29a3f;
-    --color-illo-yellow: #f4cc5c;
-    --color-illo-leaf: #12804f;
-    --shadow-sm: none;
-    --shadow-md: none;
-    --shadow-lg: none;
+    --color-skeleton: #2c261f;
+    --color-skeleton-shine: #362f26;
+    --paper-grain-opacity: 0.05;
   }
 }
