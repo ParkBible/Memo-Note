@@ -11,8 +11,10 @@ import { HttpError } from './errors.js';
  */
 
 const SCOPE = 'openid email https://www.googleapis.com/auth/drive.appdata';
-const SESSION_COOKIE = 'mn_session';
-const REFRESH_COOKIE = 'mn_refresh';
+// 세션·refresh 쿠키는 허브·레시피노트·노벨벙커·메모노트가 같은 이름·형식·SESSION_SECRET 으로 함께 쓴다.
+// COOKIE_DOMAIN(예: park-bible.com)을 주면 하위 도메인 전체에 걸려 한 곳에서 로그인하면 다른 앱도 로그인된다
+const SESSION_COOKIE = 'pb_session';
+const REFRESH_COOKIE = 'pb_refresh';
 const OAUTH_COOKIE = 'mn_oauth';
 const SESSION_MAX_AGE = 60 * 60 * 24 * 30; // 30일
 
@@ -48,7 +50,10 @@ function requireConfig() {
 /** 콜백 주소의 기준. 프록시 뒤라 요청 URL 로 알기 어려우면 APP_ORIGIN 으로 정한다 */
 const appOrigin = (c: Context) => process.env.APP_ORIGIN?.trim().replace(/\/$/, '') || new URL(c.req.url).origin;
 
-const cookieOptions = (c: Context, maxAge: number): CookieOptions => ({
+const cookieDomain = () => process.env.COOKIE_DOMAIN?.trim() || undefined;
+
+const cookieOptions = (c: Context, maxAge: number, shared = false): CookieOptions => ({
+  ...(shared && cookieDomain() ? { domain: cookieDomain() } : {}),
   httpOnly: true,
   secure: appOrigin(c).startsWith('https://'),
   sameSite: 'Lax',
@@ -90,7 +95,8 @@ async function readSession(c: Context): Promise<string | null> {
 }
 
 function clearAuthCookies(c: Context) {
-  for (const name of [SESSION_COOKIE, REFRESH_COOKIE, OAUTH_COOKIE]) deleteCookie(c, name, { path: '/' });
+  for (const name of [SESSION_COOKIE, REFRESH_COOKIE]) deleteCookie(c, name, { path: '/', domain: cookieDomain() });
+  deleteCookie(c, OAUTH_COOKIE, { path: '/' });
 }
 
 const isProduction = () => process.env.NODE_ENV === 'production' || !!process.env.VERCEL;
@@ -159,8 +165,8 @@ authRoutes.get('/callback', async (c) => {
   if (!email || !emailVerified || aud !== clientId || !allowed.includes(email)) return fail('denied');
 
   const exp = Date.now() + SESSION_MAX_AGE * 1000;
-  await setSignedCookie(c, SESSION_COOKIE, `${email}|${exp}`, secret, cookieOptions(c, SESSION_MAX_AGE));
-  await setSignedCookie(c, REFRESH_COOKIE, data.refresh_token, secret, cookieOptions(c, SESSION_MAX_AGE));
+  await setSignedCookie(c, SESSION_COOKIE, `${email}|${exp}`, secret, cookieOptions(c, SESSION_MAX_AGE, true));
+  await setSignedCookie(c, REFRESH_COOKIE, data.refresh_token, secret, cookieOptions(c, SESSION_MAX_AGE, true));
   return c.redirect('/');
 });
 
