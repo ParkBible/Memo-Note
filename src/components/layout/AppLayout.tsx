@@ -5,7 +5,7 @@ import { SyncControl } from './SyncControl';
 import styles from './AppLayout.module.css';
 
 // 내 서비스 모음 대시보드 (Park-Hub)
-const HUB_URL = 'https://park-hub-blush.vercel.app';
+const HUB_URL = 'https://park-bible.com';
 
 const THEME_META: Record<ThemeMode, { icon: IconName; label: string }> = {
   light: { icon: 'sun', label: '라이트 모드 (눌러서 다크로)' },
